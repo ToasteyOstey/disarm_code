@@ -1,0 +1,58 @@
+alias: Alarm State (Disarmed)
+description: ""
+trigger:
+  - platform: device
+    device_id: 64db2ce0e1a24e2e4fae2af87d3459f2
+    domain: alarm_control_panel
+    entity_id: 05e81a574e9270d5d3ad5a491c4b5de7
+    type: disarmed
+condition: []
+action:
+  - service: zwave_js.set_config_parameter
+    data:
+      parameter: "13"
+      value: "255"
+    target:
+      device_id: 73a034c12e51362032e3d7f18067b2dd
+  - service: zwave_js.set_config_parameter
+    data:
+      parameter: "13"
+      value: "255"
+    target:
+      device_id:
+        - c81649c465346596c84e19eae9c2f79b
+  - device_id: 48c3874d16329ae5bda7e851fb31cb7d
+    domain: number
+    entity_id: number.south_kitchen_inovelli_dimmer_ledcolorwhenon
+    type: set_value
+    value: 255
+  - device_id: 48c3874d16329ae5bda7e851fb31cb7d
+    domain: number
+    entity_id: number.south_kitchen_inovelli_dimmer_ledcolorwhenoff
+    type: set_value
+    value: 255
+  - device_id: dcce90061b6fb27e536934c1f748f173
+    domain: number
+    entity_id: number.0x6c5cb1fffe56d498_ledcolorwhenon
+    type: set_value
+    value: 255
+  - device_id: dcce90061b6fb27e536934c1f748f173
+    domain: number
+    entity_id: number.0x6c5cb1fffe56d498_ledcolorwhenoff
+    type: set_value
+    value: 255
+  - type: turn_on
+    device_id: 462c85b70b8498ac56668cccf46e68fe
+    entity_id: switch.coffee_pot
+    domain: switch
+  - type: turn_on
+    device_id: eb12c9b7fadb3b093b9b942720113b5b
+    entity_id: switch.tv_power_on_off
+    domain: switch
+  - service: ecobee.resume_program
+    data:
+      entity_id: climate.thermostat
+      resume_all: true
+  - service: presence_simulation.stop
+    data: {}
+mode: single
